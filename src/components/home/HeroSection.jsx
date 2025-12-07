@@ -29,30 +29,33 @@ function HeroSection() {
     ]
 
     return (
-        <div className='pt-20'>
-            <Swiper
-                spaceBetween={30}
-                centeredSlides={true}
-                loop={true}
-                autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                }}
-                pagination={{
-                    clickable: true,
-                }}
-                navigation={true}
-                modules={[Autoplay, Pagination, Navigation]}
-                className="mySwiper"
-            >
+        <div>
+            <div className='w-full h-[70vh] bg-red-600 rounded-xl'>
+                <Swiper
+                    spaceBetween={30}
+                    centeredSlides={true}
+                    loop={true}
+                    autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    }}
+                    pagination={{
+                        clickable: true,
+                    }}
+                    navigation={true}
+                    modules={[Autoplay, Pagination, Navigation]}
+                    className="mySwiper"
+                >
 
-                {
-                    heroBanners.map((banner) => <SwiperSlide key={banner.id}>
-                        <HeroBannerCard banner={banner} />
-                    </SwiperSlide>)
-                }
+                    {
+                        heroBanners.map((banner) => <SwiperSlide key={banner.id}>
+                            <HeroBannerCard banner={banner} />
+                        </SwiperSlide>)
+                    }
 
-            </Swiper>
+                </Swiper>
+            </div>
+
         </div>
     );
 }
