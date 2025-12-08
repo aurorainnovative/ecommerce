@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage.jsx'
 import ProductsPage from './pages/ProductsPage.jsx'
 import CartPage from './pages/CartPage.jsx'
 import App from './App.jsx'
+import NotFoundPage from './pages/NotFoundPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')).render(
           <Route path='/' element={<HomePage />} />
           <Route path='/products' element={<ProductsPage />} />
           <Route path='/cart' element={<CartPage />} />
+          <Route path='*' element={<NotFoundPage/>} />
         </Route>
       </Routes>
     </Router>
