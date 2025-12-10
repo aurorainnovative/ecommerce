@@ -23,11 +23,10 @@ export default function ProductFilters({ isDark }) {
     const ratings = [5, 4, 3, 2, 1];
 
     return (
-        <div className={`rounded-2xl p-6 transition-all duration-300 ${
-            isDark 
-                ? 'bg-white/5 backdrop-blur-xl border border-white/10' 
-                : 'bg-white/70 backdrop-blur-xl border border-gray-100 shadow-lg'
-        }`}>
+        <div className={`rounded-2xl p-6 transition-all duration-300 ${isDark
+            ? 'bg-white/5 backdrop-blur-xl border border-white/10'
+            : 'bg-white/70 backdrop-blur-xl border border-gray-100 shadow-lg'
+            }`}>
             {/* Header */}
             <div className="flex items-center gap-2 mb-6 pb-4 border-b border-gray-200 dark:border-white/10">
                 <SlidersHorizontal className={`w-5 h-5 ${isDark ? 'text-indigo-400' : 'text-indigo-600'}`} />
@@ -45,15 +44,14 @@ export default function ProductFilters({ isDark }) {
                     {categories.map((category, index) => (
                         <label
                             key={index}
-                            className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all duration-200 ${
-                                index === 0
-                                    ? isDark
-                                        ? 'bg-indigo-500/20 text-indigo-400'
-                                        : 'bg-indigo-50 text-indigo-600'
-                                    : isDark
+                            className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all duration-200 ${index === 0
+                                ? isDark
+                                    ? 'bg-indigo-500/20 text-indigo-400'
+                                    : 'bg-indigo-50 text-indigo-600'
+                                : isDark
                                     ? 'text-gray-400 hover:bg-white/5'
                                     : 'text-gray-600 hover:bg-gray-50'
-                            }`}
+                                }`}
                         >
                             <div className="flex items-center gap-2">
                                 <input
@@ -79,11 +77,10 @@ export default function ProductFilters({ isDark }) {
                     {priceRanges.map((range, index) => (
                         <label
                             key={index}
-                            className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all duration-200 ${
-                                isDark
-                                    ? 'text-gray-400 hover:bg-white/5'
-                                    : 'text-gray-600 hover:bg-gray-50'
-                            }`}
+                            className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all duration-200 ${isDark
+                                ? 'text-gray-400 hover:bg-white/5'
+                                : 'text-gray-600 hover:bg-gray-50'
+                                }`}
                         >
                             <div className="flex items-center gap-2">
                                 <input
@@ -107,11 +104,10 @@ export default function ProductFilters({ isDark }) {
                     {ratings.map((rating) => (
                         <label
                             key={rating}
-                            className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer transition-all duration-200 ${
-                                isDark
-                                    ? 'text-gray-400 hover:bg-white/5'
-                                    : 'text-gray-600 hover:bg-gray-50'
-                            }`}
+                            className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer transition-all duration-200 ${isDark
+                                ? 'text-gray-400 hover:bg-white/5'
+                                : 'text-gray-600 hover:bg-gray-50'
+                                }`}
                         >
                             <input
                                 type="checkbox"
@@ -121,11 +117,10 @@ export default function ProductFilters({ isDark }) {
                                 {[...Array(5)].map((_, i) => (
                                     <Star
                                         key={i}
-                                        className={`w-4 h-4 ${
-                                            i < rating
-                                                ? 'fill-amber-400 text-amber-400'
-                                                : 'text-gray-300'
-                                        }`}
+                                        className={`w-4 h-4 ${i < rating
+                                            ? 'fill-amber-400 text-amber-400'
+                                            : 'text-gray-300'
+                                            }`}
                                     />
                                 ))}
                             </div>
@@ -136,11 +131,10 @@ export default function ProductFilters({ isDark }) {
             </div>
 
             {/* Reset Button */}
-            <button className={`w-full py-3 rounded-xl font-medium transition-all duration-200 ${
-                isDark
-                    ? 'bg-white/10 text-white hover:bg-white/20'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}>
+            <button className={`w-full py-3 rounded-xl font-medium transition-all duration-200 ${isDark
+                ? 'bg-white/10 text-white hover:bg-white/20'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}>
                 Reset Filters
             </button>
         </div>

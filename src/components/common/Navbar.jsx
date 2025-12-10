@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../context";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const {cartItemsCount} = useContext(CartContext)
 
   const navlinks = [
     { name: "Home", href: "/" },
@@ -30,6 +32,7 @@ export default function Navbar() {
 
             ))
           }
+          <li>{cartItemsCount}</li>
         </ul>
 
         {/* Mobile Menu Button */}
