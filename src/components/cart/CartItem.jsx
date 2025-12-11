@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Trash2, Minus, Plus } from 'lucide-react';
+import { CartContext } from '../../context';
 
-export default function CartItem({ item, isDark }) {
+export default function CartItem({ item }) {
+    const { removeFromCart } = useContext(CartContext);
     return (
-        <div className={`group relative flex gap-4 sm:gap-6 p-4 sm:p-6 rounded-2xl transition-all duration-300 ${isDark
-                ? 'bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 hover:border-white/20'
-                : 'bg-white/70 backdrop-blur-xl border border-gray-100 hover:shadow-xl hover:shadow-gray-200/50'
-            }`}
+        <div
+            className={`group relative flex gap-4 sm:gap-6 p-4 sm:p-6 rounded-2xl transition-all duration-300
+                bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-gray-100 dark:border-white/10
+                hover:shadow-xl hover:shadow-gray-200/50 dark:hover:bg-white/10 dark:hover:border-white/20
+            `}
         >
             {/* Product Image */}
             <div
-                className={`relative w-24 h-24 sm:w-32 sm:h-32 rounded-xl overflow-hidden shrink-0 ${isDark
-                        ? 'bg-white/10'
-                        : 'bg-gray-100'
-                    }`}
+                className={`relative w-24 h-24 sm:w-32 sm:h-32 rounded-xl overflow-hidden shrink-0
+                    bg-gray-100 dark:bg-white/10
+                `}
             >
                 <img
                     src={item.image}
@@ -27,23 +29,20 @@ export default function CartItem({ item, isDark }) {
                 <div className="flex justify-between items-start gap-2">
                     <div className="min-w-0">
                         <h3
-                            className={`font-semibold text-base sm:text-lg truncate ${isDark ? 'text-white' : 'text-gray-900'
-                                }`}
+                            className="font-semibold text-base sm:text-lg truncate text-gray-900 dark:text-white"
                         >
                             {item.title}
                         </h3>
 
-                        <p className={`text-sm mt-1 line-clamp-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                        <p className="text-sm mt-1 line-clamp-1 text-gray-500 dark:text-gray-400">
                             {item.description}
                         </p>
                     </div>
 
                     {/* Remove Button */}
-                    <button
-                        className={`p-2 rounded-xl transition-all duration-300 opacity-60 hover:opacity-100 ${isDark
-                                ? 'hover:bg-red-500/20 text-red-400'
-                                : 'hover:bg-red-50 text-red-500'
-                            }`}
+                    <button onClick={()=>removeFromCart(item.id)}
+                        className="p-2 rounded-xl transition-all duration-300 opacity-60 hover:opacity-100
+                            hover:bg-red-50 text-red-500 dark:hover:bg-red-500/20 dark:text-red-400"
                     >
                         <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
                     </button>
@@ -52,30 +51,23 @@ export default function CartItem({ item, isDark }) {
                 {/* Price & Quantity */}
                 <div className="flex items-end justify-between mt-4 gap-4">
                     {/* Quantity Controls */}
-                    <div className={`flex items-center gap-1 rounded-xl p-1 ${isDark ? 'bg-white/10' : 'bg-gray-100'
-                        }`}
-                    >
+                    <div className="flex items-center gap-1 rounded-xl p-1 bg-gray-100 dark:bg-white/10">
                         <button
-                            className={`p-2 rounded-lg transition-all duration-200 ${isDark
-                                    ? 'hover:bg-white/10 text-white'
-                                    : 'hover:bg-white text-gray-700 hover:shadow-sm'
-                                }`}
+                            className="p-2 rounded-lg transition-all duration-200
+                                hover:bg-white text-gray-700 hover:shadow-sm dark:text-white dark:hover:bg-white/10"
                         >
                             <Minus className="w-4 h-4" />
                         </button>
 
                         <span
-                            className={`w-10 text-center font-semibold tabular-nums ${isDark ? 'text-white' : 'text-gray-900'
-                                }`}
+                            className="w-10 text-center font-semibold tabular-nums text-gray-900 dark:text-white"
                         >
                             {item.quantity}
                         </span>
 
                         <button
-                            className={`p-2 rounded-lg transition-all duration-200 ${isDark
-                                    ? 'hover:bg-white/10 text-white'
-                                    : 'hover:bg-white text-gray-700 hover:shadow-sm'
-                                }`}
+                            className="p-2 rounded-lg transition-all duration-200
+                                hover:bg-white text-gray-700 hover:shadow-sm dark:text-white dark:hover:bg-white/10"
                         >
                             <Plus className="w-4 h-4" />
                         </button>
@@ -83,7 +75,7 @@ export default function CartItem({ item, isDark }) {
 
                     {/* Price */}
                     <div className="text-right">
-                        <p className={`text-lg sm:text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        <p className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
                             ৳{(item.price * item.quantity).toFixed(2)}
                         </p>
                     </div>

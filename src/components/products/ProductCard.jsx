@@ -4,12 +4,19 @@ import { CartContext } from '../../context';
 
 export default function ProductCard({ product }) {
 
-    const {addToCart} = useContext(CartContext)
+    const { addToCart, removeFromCart, isExistInCart } = useContext(CartContext)
 
     const handleAddToCart = (item) => {
-        const newProduct = {...item, quantity: 1}
-        addToCart(newProduct)
+        const isExist = isExistInCart(item.id);
+        if (isExist) {
+            removeFromCart(item.id)
+        } else {
+            const newProduct = { ...item, quantity: 1 }
+            addToCart(newProduct)
+        }
     }
+
+
     return (
         <div className="
             group relative rounded-2xl overflow-hidden transition-all duration-300
@@ -47,15 +54,15 @@ export default function ProductCard({ product }) {
 
                 {/* Add to Cart */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <button onClick={()=>handleAddToCart(product)} className="
-                        w-full py-3 px-4 rounded-xl font-semibold text-white
-                        bg-linear-to-r from-indigo-600 to-purple-600
-                        hover:from-indigo-700 hover:to-purple-700
+                    <button onClick={() => handleAddToCart(product)} className={`
+                        w-full py-3 px-4 rounded-xl font-semibold ${isExistInCart(product.id) ? "text-white bg-red-600 hover:bg-red-700" : "text-white bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"}
                         transition-all duration-300 shadow-lg hover:shadow-xl
                         flex items-center justify-center gap-2
-                    ">
+                    `}>
                         <ShoppingCart className="w-4 h-4" />
-                        Add to Cart
+                        {
+                            isExistInCart(product.id) ? "Remove from Cart" : "Add to Cart"
+                        }
                     </button>
                 </div>
             </div>
@@ -81,11 +88,10 @@ export default function ProductCard({ product }) {
                         {[...Array(5)].map((_, i) => (
                             <Star
                                 key={i}
-                                className={`w-4 h-4 ${
-                                    i < Math.floor(product.rating)
-                                        ? 'fill-amber-400 text-amber-400'
-                                        : 'text-gray-300 dark:text-gray-600'
-                                }`}
+                                className={`w-4 h-4 ${i < Math.floor(product.rating)
+                                    ? 'fill-amber-400 text-amber-400'
+                                    : 'text-gray-300 dark:text-gray-600'
+                                    }`}
                             />
                         ))}
                     </div>

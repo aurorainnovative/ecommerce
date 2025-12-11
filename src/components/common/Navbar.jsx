@@ -1,18 +1,17 @@
 import { useContext, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, ShoppingBag, ShoppingCart, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../context";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const {cartItemsCount} = useContext(CartContext)
+  const { cartItemsCount } = useContext(CartContext)
 
   const navlinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
     { name: "Products", href: "/products" },
-    { name: "Cart", href: "/cart" },
   ]
 
   return (
@@ -32,7 +31,11 @@ export default function Navbar() {
 
             ))
           }
-          <li>{cartItemsCount}</li>
+          <li className="relative">
+            <Link to={"/cart"}>
+              <ShoppingCart /></Link>
+            <span className="absolute bg-black text-xs h-4 w-4 rounded-full -right-1 -top-1 text-white grid place-content-center">{cartItemsCount}</span>
+          </li>
         </ul>
 
         {/* Mobile Menu Button */}
