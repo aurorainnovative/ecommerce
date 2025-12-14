@@ -3,7 +3,8 @@ import { Trash2, Minus, Plus } from 'lucide-react';
 import { CartContext } from '../../context';
 
 export default function CartItem({ item }) {
-    const { removeFromCart } = useContext(CartContext);
+    const { removeFromCart, increaseQuantity, decreaseQuantity } = useContext(CartContext);
+    console.log(item)
     return (
         <div
             className={`group relative flex gap-4 sm:gap-6 p-4 sm:p-6 rounded-2xl transition-all duration-300
@@ -53,6 +54,7 @@ export default function CartItem({ item }) {
                     {/* Quantity Controls */}
                     <div className="flex items-center gap-1 rounded-xl p-1 bg-gray-100 dark:bg-white/10">
                         <button
+                            onClick={()=>decreaseQuantity(item.id)}
                             className="p-2 rounded-lg transition-all duration-200
                                 hover:bg-white text-gray-700 hover:shadow-sm dark:text-white dark:hover:bg-white/10"
                         >
@@ -66,6 +68,7 @@ export default function CartItem({ item }) {
                         </span>
 
                         <button
+                            onClick={()=>increaseQuantity(item.id)}
                             className="p-2 rounded-lg transition-all duration-200
                                 hover:bg-white text-gray-700 hover:shadow-sm dark:text-white dark:hover:bg-white/10"
                         >
@@ -76,7 +79,7 @@ export default function CartItem({ item }) {
                     {/* Price */}
                     <div className="text-right">
                         <p className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
-                            ৳{(item.price * item.quantity).toFixed(2)}
+                            ৳{item.price * item.quantity}
                         </p>
                     </div>
                 </div>

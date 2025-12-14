@@ -25,8 +25,36 @@ function CartContextProvider({ children }) {
         setCartItems(updatedCart)
     }
 
+    const increaseQuantity = (id) => {
+        const updatedArray = cartItems.map((item) => {
+            if (item.id === id) {
+                return { ...item, quantity: item.quantity + 1 }
+            } else {
+                return { ...item }
+            }
+        });
+
+        setCartItems(updatedArray)
+    }
+
+    const decreaseQuantity = (id) => {
+        const updatedArray = cartItems.map((item) => {
+            if (item.id === id) {
+                if (item.quantity > 1) {
+                    return { ...item, quantity: item.quantity - 1 }
+                } else {
+                    return { ...item, quantity: 1 }
+                }
+            } else {
+                return { ...item }
+            }
+        });
+
+        setCartItems(updatedArray)
+    }
+
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, cartItemsCount, isExistInCart }}>
+        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, cartItemsCount, isExistInCart, increaseQuantity, decreaseQuantity }}>
             {children}
         </CartContext.Provider>
     );

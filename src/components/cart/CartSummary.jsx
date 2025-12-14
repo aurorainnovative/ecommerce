@@ -1,8 +1,9 @@
 import React from 'react';
 import { ShieldCheck, Truck, RefreshCw, CreditCard, Lock, ArrowRight } from 'lucide-react';
+import { useCartSummary } from '../../hooks/useCartSummary';
 
-export default function CartSummary({ subtotal, shipping, discount, total, itemCount, isDark }) {
-    const trustBadges = [
+
+ const trustBadges = [
         { icon: ShieldCheck, label: 'Secure Checkout' },
         { icon: Truck, label: 'Free Returns' },
         { icon: RefreshCw, label: '30-Day Guarantee' },
@@ -14,6 +15,9 @@ export default function CartSummary({ subtotal, shipping, discount, total, itemC
         { name: 'Amex', color: 'from-blue-400 to-cyan-500' },
         { name: 'PayPal', color: 'from-blue-500 to-indigo-600' },
     ];
+export default function CartSummary({  isDark }) {
+   const {subTotal, cartItemCount, deliveryFee, total, discount} = useCartSummary();
+
 
     return (
         <div className={`sticky top-8 rounded-3xl p-6 sm:p-8 transition-all duration-300 ${isDark
@@ -29,22 +33,22 @@ export default function CartSummary({ subtotal, shipping, discount, total, itemC
             <div className="space-y-4 mb-6">
                 <div className="flex justify-between items-center">
                     <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>
-                        Subtotal ({itemCount} items)
+                        Subtotal ({cartItemCount} items)
                     </span>
                     <span className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                        ${subtotal.toFixed(2)}
+                        ${subTotal}
                     </span>
                 </div>
 
                 <div className="flex justify-between items-center">
                     <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>
-                        Shipping
+                        deliveryFee
                     </span>
-                    <span className={`font-semibold ${shipping === 0
+                    <span className={`font-semibold ${deliveryFee === 0
                         ? 'text-emerald-500'
                         : isDark ? 'text-white' : 'text-gray-900'
                         }`}>
-                        {shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}
+                        {deliveryFee === 0 ? 'Free' : `$${deliveryFee.toFixed(2)}`}
                     </span>
                 </div>
 

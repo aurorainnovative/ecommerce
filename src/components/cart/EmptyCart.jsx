@@ -1,7 +1,6 @@
 import React from 'react';
 import { ShoppingBag, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
 
 export default function EmptyCart({ isDark }) {
     return (
@@ -23,7 +22,7 @@ export default function EmptyCart({ isDark }) {
             </p>
 
             <Link
-                to={createPageUrl("products")}
+                to={"/products"}
                 className="px-8 py-4 rounded-xl font-semibold text-white bg-linear-to-r from-indigo-600 to-purple-600 shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40 transition-all duration-300 flex items-center gap-2 group"
             >
                 Start Shopping

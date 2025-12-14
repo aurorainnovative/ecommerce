@@ -4,10 +4,13 @@ import CartSummary from '../components/cart/CartSummary';
 import Header from '../components/cart/Header';
 import { useContext } from 'react';
 import { CartContext } from '../context';
+import EmptyCart from '../components/cart/EmptyCart';
 
 
 export default function Cart() {
     const {cartItems} = useContext(CartContext)
+   if(cartItems.length === 0) return <EmptyCart/>
+
 
     return (
         <div className="min-h-screen transition-colors duration-500 bg-linear-to-br 

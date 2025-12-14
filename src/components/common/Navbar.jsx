@@ -8,7 +8,6 @@ export default function Navbar() {
   const { cartItemsCount } = useContext(CartContext)
 
   const navlinks = [
-    { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
     { name: "Products", href: "/products" },
@@ -19,7 +18,9 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
 
         {/* Logo */}
-        <h1 className="text-2xl font-bold text-blue-600">Aurora</h1>
+        <Link to={"/"}>
+          <h1 className="text-2xl font-bold text-blue-600">Aurora</h1>
+        </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-8 text-gray-700 font-medium">
@@ -60,6 +61,7 @@ export default function Navbar() {
               </li>
             ))
           }
+          <Link to={"/cart"}>Cart</Link>
         </ul>
       </div>
     </header>
