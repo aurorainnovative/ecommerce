@@ -37,6 +37,12 @@ export default function Navbar() {
               <ShoppingCart /></Link>
             <span className="absolute bg-black text-xs h-4 w-4 rounded-full -right-1 -top-1 text-white grid place-content-center">{cartItemsCount}</span>
           </li>
+          <li>
+            <Link to={"/signup"} className="px-5 py-2 rounded-sm bg-blue-400 text-white">Signup</Link>
+          </li>
+          <li>
+            <Link to={"/login"} className="px-5 py-2 rounded-sm bg-blue-600 text-white">Login</Link>
+          </li>
         </ul>
 
         {/* Mobile Menu Button */}

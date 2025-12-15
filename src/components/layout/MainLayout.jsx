@@ -5,6 +5,8 @@ import HomePage from '../../pages/HomePage';
 import NotFoundPage from '../../pages/NotFoundPage';
 import CartPage from '../../pages/CartPage'
 import ProductsPage from "../../pages/ProductsPage"
+import LoginPage from '../../pages/LoginPage';
+import SignupPage from '../../pages/SignupPage';
 
 function MainLayout() {
     return (
@@ -15,6 +17,8 @@ function MainLayout() {
                     <Route path='/products' element={<ProductsPage />} />
                     <Route path='/cart' element={<CartPage />} />
                     <Route path='*' element={<NotFoundPage />} />
+                    <Route path='/login' element={<LoginPage />} />
+                    <Route path='/signup' element={<SignupPage />} />
                 </Route>
             </Routes>
         </Router>
