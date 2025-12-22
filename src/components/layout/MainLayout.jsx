@@ -7,6 +7,7 @@ import CartPage from '../../pages/CartPage'
 import ProductsPage from "../../pages/ProductsPage"
 import LoginPage from '../../pages/LoginPage';
 import SignupPage from '../../pages/SignupPage';
+import ProfilePage from '../../pages/ProfilePage';
 
 function MainLayout() {
     return (
@@ -19,6 +20,7 @@ function MainLayout() {
                     <Route path='*' element={<NotFoundPage />} />
                     <Route path='/login' element={<LoginPage />} />
                     <Route path='/signup' element={<SignupPage />} />
+                    <Route path='/profile' element={<ProfilePage />} />
                 </Route>
             </Routes>
         </Router>

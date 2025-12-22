@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -7,6 +8,7 @@ function LoginPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useNavigate();
+  const { updateLoginStatus } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +24,7 @@ function LoginPage() {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({email, password}),
+      body: JSON.stringify({ email, password }),
     });
 
     const result = await response.json();
@@ -33,8 +35,12 @@ function LoginPage() {
       return;
     }
 
-    console.log(result);
-    router("/")
+    updateLoginStatus({
+      name: result?.user?.name,
+      email: result?.user?.email
+    })
+    
+    router("/");
     setIsLoading(false);
   };
 
