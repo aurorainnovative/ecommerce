@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ShieldCheck, Truck, RefreshCw, CreditCard, Lock, ArrowRight } from 'lucide-react';
 import { useCartSummary } from '../../hooks/useCartSummary';
+import { useAuth } from '../../hooks/useAuth';
+import { CartContext } from '../../context';
+import { useNavigate } from 'react-router-dom';
+import { useOrder } from '../../hooks/useOrder';
 
 
  const trustBadges = [
@@ -17,6 +21,20 @@ import { useCartSummary } from '../../hooks/useCartSummary';
     ];
 export default function CartSummary({  isDark }) {
    const {subTotal, cartItemCount, deliveryFee, total, discount} = useCartSummary();
+   const {cartItems} = useContext(CartContext)
+   const navigate = useNavigate()
+   const {orderDetails} = useOrder()
+
+   const handleOrder = () => {
+    if(cartItemCount === 0) return;
+    const order = {
+        orderItems: cartItems,
+        total,
+        deliveryFee
+    }
+    orderDetails(order)
+    navigate("/order")
+   }
 
 
     return (
@@ -103,7 +121,7 @@ export default function CartSummary({  isDark }) {
             </div>
 
             {/* Checkout Button */}
-            <button className="w-full py-4 px-6 rounded-xl font-semibold text-white bg-linear-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-size-[200%_100%] hover:bg-right transition-all duration-500 shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40 flex items-center justify-center gap-2 group">
+            <button onClick={handleOrder} className="w-full py-4 px-6 rounded-xl font-semibold text-white bg-linear-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-size-[200%_100%] hover:bg-right transition-all duration-500 shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40 flex items-center justify-center gap-2 group">
                 <Lock className="w-4 h-4" />
                 Proceed to Checkout
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

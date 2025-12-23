@@ -27,3 +27,8 @@
   height: 100%;
   object-fit: cover;
 }
+
+.input {
+  @apply border rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500;
+}
+

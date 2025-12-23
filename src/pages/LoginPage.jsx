@@ -35,7 +35,9 @@ function LoginPage() {
       return;
     }
 
+
     updateLoginStatus({
+      id: result?.user?._id,
       name: result?.user?.name,
       email: result?.user?.email
     })

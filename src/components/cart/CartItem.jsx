@@ -4,7 +4,6 @@ import { CartContext } from '../../context';
 
 export default function CartItem({ item }) {
     const { removeFromCart, increaseQuantity, decreaseQuantity } = useContext(CartContext);
-    console.log(item)
     return (
         <div
             className={`group relative flex gap-4 sm:gap-6 p-4 sm:p-6 rounded-2xl transition-all duration-300
