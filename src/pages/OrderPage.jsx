@@ -1,8 +1,58 @@
+import { useState } from "react";
 import { useOrder } from "../hooks/useOrder";
+import { useAuth } from "../hooks/useAuth";
 
 const OrderPage = () => {
-    const {orderItems, total, deliveryFee} = useOrder()
+    const {orderItems, total, deliveryFee} = useOrder();
+    const [isLoading, setIsLoading] = useState(false)
+    const {user} = useAuth()
+    const [error, setError] = useState("");
+    const [formData, setFormData] = useState({
+      fullname: "",
+      phone: "",
+      address: "",
+      city: "",
+      zipCode: ""
+    });
 
+    const handleOnChange = (e) => {
+      const {name, value} = e.target;
+      setFormData((prev)=> ({
+        ...prev,
+        [name]: value
+      }))
+    }
+
+
+    const onSubmit = async () => {
+      setError("")
+      const {fullname, phone, address, city, zipCode} = formData;
+      if(!fullname) return setError("Fullname is required!");
+      if(!phone) return setError("phone is required!");
+      if(!address) return setError("address is required!");
+      if(!city) return setError("city is required!");
+      if(!zipCode) return setError("zip code is required!");
+      setIsLoading(true)
+      
+      const order = {...formData, orderItems, total, deliveryFee, userId: user.id};
+      
+      try {
+        const response = await fetch("http://localhost:4040/order", {
+          method: "POST",
+          headers: {
+            "content-type":"application/json"
+          },
+          body: JSON.stringify(order)
+        });
+
+        const result = await response.json();
+        console.log(result)
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false)
+      }
+    }
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 pt-20">
@@ -47,11 +97,12 @@ const OrderPage = () => {
           <div className="bg-white p-6 rounded-xl shadow">
             <h2 className="text-xl font-semibold mb-4">Shipping Address</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input className="input" placeholder="Full Name" />
-              <input className="input" placeholder="Phone Number" />
-              <input className="input md:col-span-2" placeholder="Address" />
-              <input className="input" placeholder="City" />
-              <input className="input" placeholder="Postal Code" />
+              {error && <p className="text-white bg-red-400 col-span-2 p-2 text-sm rounded-sm">{error}</p>}
+              <input className="input" placeholder="Full Name" name="fullname" value={formData?.fullname} onChange={handleOnChange} />
+              <input className="input" placeholder="Phone Number" name="phone" value={formData?.phone} onChange={handleOnChange} />
+              <input className="input md:col-span-2" placeholder="Address" name="address" value={formData?.address} onChange={handleOnChange} />
+              <input className="input" placeholder="City" name="city" value={formData?.city} onChange={handleOnChange} />
+              <input className="input" placeholder="Postal Code" name="zipCode" value={formData?.zipCode} onChange={handleOnChange} />
             </div>
           </div>
         </div>
@@ -75,8 +126,8 @@ const OrderPage = () => {
             </div>
           </div>
 
-          <button className="w-full mt-6 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-medium">
-            Place Order
+          <button disabled={isLoading} onClick={onSubmit} className="w-full disabled:bg-gray-400 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-medium">
+            {isLoading ? "Submitting...":"Place Order"}
           </button>
         </div>
 

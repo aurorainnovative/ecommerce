@@ -6,6 +6,7 @@ function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const [user, setUser] = useState({
+    id: null,
     name: null,
     email: null,
   });
@@ -29,6 +30,7 @@ function AuthProvider({ children }) {
   const handleLogout = () => {
     setIsAuthenticate(false);
     setUser({
+      id: null,
       name: null,
       email: null,
     });
