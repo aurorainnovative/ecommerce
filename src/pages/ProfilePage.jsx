@@ -2,6 +2,7 @@ import { useAuth } from "../hooks/useAuth"
 
 const ProfilePage = () => {
   const {user} = useAuth()
+  console.log(user)
   return (
     <div className="h-screen w-full grid place-content-center text-2xl">
       <h1>Name : {user?.name}</h1>

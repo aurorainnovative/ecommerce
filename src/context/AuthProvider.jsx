@@ -9,6 +9,7 @@ function AuthProvider({ children }) {
     id: null,
     name: null,
     email: null,
+    role: null
   });
 
   useEffect(() => {
@@ -33,6 +34,7 @@ function AuthProvider({ children }) {
       id: null,
       name: null,
       email: null,
+      role: null
     });
     localStorage.removeItem("user")
   };

@@ -35,14 +35,15 @@ function LoginPage() {
       return;
     }
 
-
     updateLoginStatus({
       id: result?.user?._id,
       name: result?.user?.name,
-      email: result?.user?.email
-    })
-    
-    router("/");
+      email: result?.user?.email,
+      role: result?.user?.role,
+    });
+
+    result.user.role === "ADMIN" ? router("/admin") : router("/");
+
     setIsLoading(false);
   };
 

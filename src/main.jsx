@@ -2,17 +2,17 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import "./index.css";
-import MainLayout from "./components/layout/MainLayout";
 import CartContextProvider from "./context/CartContextProvider";
 import AuthProvider from "./context/AuthProvider";
 import OrderProvider from "./context/OrderProvider";
+import App from "./App";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <CartContextProvider>
       <AuthProvider>
         <OrderProvider>
-          <MainLayout />
+          <App />
         </OrderProvider>
       </AuthProvider>
     </CartContextProvider>
