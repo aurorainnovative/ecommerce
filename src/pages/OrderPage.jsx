@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useOrder } from "../hooks/useOrder";
 import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const OrderPage = () => {
     const {orderItems, total, deliveryFee} = useOrder();
@@ -14,6 +15,8 @@ const OrderPage = () => {
       city: "",
       zipCode: ""
     });
+
+    const navigate = useNavigate();
 
     const handleOnChange = (e) => {
       const {name, value} = e.target;
@@ -46,7 +49,8 @@ const OrderPage = () => {
         });
 
         const result = await response.json();
-        console.log(result)
+        localStorage.removeItem("cartItems");
+        navigate("/my-orders");
       } catch (error) {
         setError(error.message);
       } finally {

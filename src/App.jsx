@@ -13,8 +13,10 @@ import AuthLayout from "./components/layout/AuthLayout";
 import PrivateRoute from "./components/common/PrivateRoute";
 import ProfilePage from "./pages/ProfilePage";
 import OrderPage from "./pages/OrderPage";
+import AdminOrderPage from "./pages/admin/OrderPage";
 import AuthRoute from "./components/common/AuthRoute";
 import AdminRoutes from "./components/common/AdminRoutes";
+import MyOrdersPage from "./pages/MyOrdersPage";
 
 const App = () => {
   return (
@@ -39,13 +41,16 @@ const App = () => {
           <Route element={<PrivateRoute />}>
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/order" element={<OrderPage />} />
+            <Route path="/my-orders" element={<MyOrdersPage/>} />
           </Route>
         </Route>
 
         {/* Admin Layout */}
         <Route element={<AdminLayout />}>
           <Route element={<AdminRoutes />}>
-            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin" element={<AdminPage />}/>
+              <Route path="/admin/orders" element={<AdminOrderPage/>} />
+              <Route path="/admin/users" element={<h1>Order page</h1>} />
           </Route>
         </Route>
       </Routes>

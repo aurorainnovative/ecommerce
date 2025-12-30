@@ -7,7 +7,7 @@ import { useAuth } from "../../hooks/useAuth";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { cartItemsCount } = useContext(CartContext);
-  const { isAuthenticate: isLoggedIn, handleLogout } = useAuth();
+  const { isAuthenticate: isLoggedIn, handleLogout, user } = useAuth();
 
   const navlinks = [
     { name: "About", href: "/about" },
@@ -25,6 +25,9 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-8 text-gray-700 font-medium">
+          {user.role === "ADMIN" && <li>
+            <Link to={"/admin"}>Admin Dashboard</Link>
+          </li>}
           {navlinks.map((link) => (
             <li key={link.name} className="hover:text-blue-600 cursor-pointer">
               <Link to={link.href}>{link.name}</Link>
@@ -51,6 +54,9 @@ export default function Navbar() {
               >
                 Logout
               </button>
+              <li>
+                <Link to={"/my-orders"}>My Orders</Link>
+              </li>
             </>
           ) : (
             <>
