@@ -31,7 +31,7 @@ function SignupPage() {
       return;
     }
 
-    const response = await fetch("http://localhost:4040/user/signup", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/user/signup`, {
         method: "POST",
         headers: {
             "content-type": "application/json"

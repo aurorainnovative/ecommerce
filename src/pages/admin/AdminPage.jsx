@@ -19,7 +19,7 @@ const AdminPage = () => {
   })
 
   const fetchDashboard = async () => {
-    const response = await fetch("http://localhost:4040/user/dashboard");
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/user/dashboard`);
     const result = await response.json();
    
     if(response.ok){

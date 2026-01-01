@@ -40,7 +40,7 @@ const OrderPage = () => {
       const order = {...formData, orderItems, total, deliveryFee, userId: user.id};
       
       try {
-        const response = await fetch("http://localhost:4040/order", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/order`, {
           method: "POST",
           headers: {
             "content-type":"application/json"

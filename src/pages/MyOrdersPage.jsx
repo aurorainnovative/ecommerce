@@ -8,7 +8,7 @@ const MyOrdersPage = () => {
 
   const fetchOrders = async () => {
           try {
-              const response = await fetch(`http://localhost:4040/order/my-orders/${user.id}`);
+              const response = await fetch(`${import.meta.env.VITE_API_URL}/order/my-orders/${user.id}`);
               const result = await response.json();
   
               if(!response.ok) throw new Error(result.message);

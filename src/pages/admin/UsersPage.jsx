@@ -5,7 +5,7 @@ const UsersPage = () => {
     const [users, setUsers] = useState([])
 
       const fetchDashboard = async () => {
-        const response = await fetch("http://localhost:4040/user/all");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/user/all`);
         const result = await response.json();
        
         if(response.ok){
