@@ -17,6 +17,7 @@ import AdminOrderPage from "./pages/admin/OrderPage";
 import AuthRoute from "./components/common/AuthRoute";
 import AdminRoutes from "./components/common/AdminRoutes";
 import MyOrdersPage from "./pages/MyOrdersPage";
+import UsersPage from "./pages/admin/UsersPage";
 
 const App = () => {
   return (
@@ -50,7 +51,7 @@ const App = () => {
           <Route element={<AdminRoutes />}>
             <Route path="/admin" element={<AdminPage />}/>
               <Route path="/admin/orders" element={<AdminOrderPage/>} />
-              <Route path="/admin/users" element={<h1>Order page</h1>} />
+              <Route path="/admin/users" element={<UsersPage/>} />
           </Route>
         </Route>
       </Routes>
